@@ -1,4 +1,5 @@
 ﻿using AspNetCoreIdentity.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,16 +9,19 @@ namespace AspNetCoreIdentity.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+        
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
 
+        [AllowAnonymous] //não é necessário usuários estar autenticado
         public IActionResult Index()
         {
             return View();
         }
 
+        [Authorize] //necessário usuários estar autenticado
         public IActionResult Privacy()
         {
             return View();
